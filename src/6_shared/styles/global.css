@@ -1,0 +1,23 @@
+:root {
+  --primary: #FF6B00;
+  --black: #040405;
+  --gray: rgba(120, 120, 128, .08);
+
+  --containerWidth: 676px;
+
+  --font-h1: bold 28px 'SF Pro Display', sans-serif;
+  --font-body: 400 20px 'SF Pro Display', sans-serif;
+  --font-caption: 400 14px 'SF Pro Display', sans-serif;
+
+}
+
+body {
+  font: var(--font-body);
+  color: var(--black);
+}
+
+.container {
+  width: var(--containerWidth);
+  margin: 0 auto;
+}
+
