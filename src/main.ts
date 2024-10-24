@@ -1,3 +1,5 @@
+import './6_shared/styles/reset.css'
+import './6_shared/styles/fonts.css'
 import './6_shared/styles/global.css'
 
 import { createApp } from 'vue'
