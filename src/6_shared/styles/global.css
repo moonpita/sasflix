@@ -11,6 +11,11 @@
 
 }
 
+button {
+  cursor: pointer;
+  padding: 0;
+  border: none;
+}
 body {
   font: var(--font-body);
   color: var(--black);
