@@ -8,9 +8,10 @@ import { createPinia } from 'pinia'
 import App from './1_app/App.vue'
 import router from './2_pages'
 
-const app = createApp(App)
+const pinia = createPinia();
+const app = createApp(App);
 
-app.use(createPinia())
-app.use(router)
+app.use(pinia);
+app.use(router);
 
 app.mount('#app')
