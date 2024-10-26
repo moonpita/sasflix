@@ -1,5 +1,5 @@
 import { BASE_API_URL } from "../config/apiConfig";
-import type { TPosts } from "../config/types";
+import type { TPostsResponse } from "../config/types";
 
 export class PublicAPIClass {
   constructor(
@@ -8,9 +8,8 @@ export class PublicAPIClass {
     this.baseAPI = baseAPI;
   }
 
-  public async getPosts(): Promise<TPosts> {
-    console.log('get')
-    return fetch(`${this.baseAPI}/posts`)
+  public async getPosts(): Promise<{ posts: TPostsResponse }> {
+    return fetch(`${this.baseAPI}/posts?limit=5`)
       .then((response) => response.json())
       .then((data) => data);
   }

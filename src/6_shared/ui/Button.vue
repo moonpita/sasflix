@@ -4,18 +4,15 @@
 
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue';
 
-export default defineComponent({
-  name: 'Button',
-  props: {
-    className: {
-      type: String,
-      default: '',
-    },
+const props = defineProps({
+  className: {
+    type: String,
+    default: '',
   }
-});
+})
 
 </script>
 

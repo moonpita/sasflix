@@ -1,19 +1,16 @@
 <template>
-  <h2 class="title">His Mother had always taught him</h2>
-  <p class="text">His mother had always taught him not to ever think of himself as better than others. He'd tried to live by this motto. He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.</p>
+  <h2 class="title">{{ title }}</h2>
+  <p class="text">{{ body }}</p>
 
-  <PostActions />
+  <PostActions :reactions="reactions" :id="id" :tags="tags" :userReaction="userReaction" />
 
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import type { TPost } from '@/6_shared/config/types';
 import PostActions from './PostActions.vue';
 
-export default defineComponent({
-  components: { PostActions },
-  name: 'Post',
-});
+const props = defineProps<TPost>()
 
 </script>
 

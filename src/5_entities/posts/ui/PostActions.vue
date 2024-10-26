@@ -1,39 +1,51 @@
 <template>
 
   <div class="actions">
-      <Button className="like">
+      <Button :className="`like ${isLiked ? 'active' : ''}`" @click="toggleLike(id)">
         <Heart />
         <span class="btn-text"> Like </span>
-        <span class="btn-count">192</span>
+        <span class="btn-count"> {{ reactions.likes }} </span>
       </Button>
-      <Button className="dislike">
+      <Button :className="`dislike ${isDisliked ? 'active' : ''}`" @click="toggleDislike(id)">
         <Dislike />
         <span class="btn-text"> Trash </span>
-        <span class="btn-count">192</span>
+        <span class="btn-count"> {{ reactions.dislikes }} </span>
       </Button>
 
       <button class="comments-btn">Open comments</button>
       <div class="comments-last">Today</div>
 
       <div class="tags">
-        <div class="tags__item">history</div>
-        <div class="tags__item">american</div>
-        <div class="tags__item">crime</div>
+        <div class="tags__item" v-for="tag in tags">{{ tag }}</div>
       </div>
   </div>
 
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import Button from '@/6_shared/ui/Button.vue';
 import Heart from '@/6_shared/icons/Heart.vue';
 import Dislike from '@/6_shared/icons/Dislike.vue';
+import { USER_REACTIONS, type TPost } from '@/6_shared/config/types';
+import { usePostsStore } from '../model/store';
+import { computed } from 'vue';
 
-export default defineComponent({
-  name: 'PostActions',
-  components: { Button, Heart, Dislike },
-});
+type TProps = Pick<TPost, 'reactions' | 'tags' | 'id' | 'userReaction'>
+const postsStore = usePostsStore();
+
+const props = defineProps<TProps>()
+
+const isLiked = computed(() => props.userReaction === USER_REACTIONS.LIKE);
+const isDisliked = computed(() => props.userReaction === USER_REACTIONS.DISLIKE);
+
+const toggleLike = (id: number) => {
+  postsStore.toggleLikePost(id);
+};
+const toggleDislike = (id: number) => {
+  postsStore.toggleDislikePost(id);
+};
+
+
 </script>
 
 <style>
@@ -56,6 +68,10 @@ export default defineComponent({
   .dislike {
     border-radius: 0px 30px 30px 0px;
     margin-right: 8px;
+  }
+
+  .like.active {
+    background: red;
   }
 
   .btn-count {

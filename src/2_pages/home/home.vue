@@ -1,27 +1,27 @@
 <template>
   <div class="posts">
-    <Post v-for="(post) in postsStore.posts"
+    <Post
+      v-for="post in postsStore.posts"
       :key="post.id"
+      :id="post.id"
       :title="post.title"
-      :text="post.body"
+      :body="post.body"
       :tags="post.tags"
+      :reactions="post.reactions"
+      :views="post.views"
+      :userId="post.userId"
+      :userReaction="post.userReaction"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { defineComponent, onMounted, ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import Post from '@/5_entities/posts/ui/Post.vue';
   import { usePostsStore } from '@/5_entities/posts/model/store';
   import { PublicAPI } from '@/6_shared/api';
 
   const postsStore = usePostsStore()
   const posts = ref([])
-
-  onMounted(async () => {
-    const data = await PublicAPI.getPosts();
-    postsStore.posts = data;
-    console.log(data, postsStore)
-  })
 
 </script>
