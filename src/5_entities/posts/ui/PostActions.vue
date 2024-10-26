@@ -1,13 +1,15 @@
 <template>
 
   <div class="actions">
-      <Button :className="`like ${isLiked ? 'active' : ''}`" @click="toggleLike(id)">
-        <Heart />
+      <Button :className="`actions-btn like ${isLiked ? 'active' : ''}`" @click="toggleLike(id)">
+        <Heart :className="'disabled'" />
+        <HeartFilled :className="'enabled'" />
         <span class="btn-text"> Like </span>
         <span class="btn-count"> {{ reactions.likes }} </span>
       </Button>
-      <Button :className="`dislike ${isDisliked ? 'active' : ''}`" @click="toggleDislike(id)">
-        <Dislike />
+      <Button :className="`actions-btn dislike ${isDisliked ? 'active' : ''}`" @click="toggleDislike(id)">
+        <Dislike :className="'disabled'"  />
+        <DislikeFilled :className="'enabled'" />
         <span class="btn-text"> Trash </span>
         <span class="btn-count"> {{ reactions.dislikes }} </span>
       </Button>
@@ -24,8 +26,10 @@
 
 <script lang="ts" setup>
 import Button from '@/6_shared/ui/Button.vue';
-import Heart from '@/6_shared/icons/Heart.vue';
 import Dislike from '@/6_shared/icons/Dislike.vue';
+import Heart from '@/6_shared/icons/Heart.vue';
+import HeartFilled from '@/6_shared/icons/HeartFilled.vue';
+import DislikeFilled from '@/6_shared/icons/DislikeFilled.vue';
 import { USER_REACTIONS, type TPost } from '@/6_shared/config/types';
 import { usePostsStore } from '../model/store';
 import { computed } from 'vue';
@@ -61,6 +65,21 @@ const toggleDislike = (id: number) => {
     align-items: center;
   }
 
+  .actions-btn svg {
+    width: 13px;
+    height: 11px;
+  }
+
+  .actions-btn .enabled {
+    display: none;
+  }
+  .actions-btn.active .disabled {
+    display: none;
+  }
+  .actions-btn.active .enabled {
+    display: block;
+  }
+
   .like {
     border-radius: 30px 0px 0px 30px;
     margin-right: 1px;
@@ -71,7 +90,21 @@ const toggleDislike = (id: number) => {
   }
 
   .like.active {
-    background: red;
+    background: var(--red);
+    color: #fff;
+  }
+
+  .like.active .btn-count {
+    color: #fff;
+  }
+
+  .dislike.active {
+    background: var(--black);
+    color: #fff;
+  }
+
+  .dislike.active .btn-count {
+    color: rgba(255, 255, 255, 0.95);
   }
 
   .btn-count {
@@ -106,6 +139,10 @@ const toggleDislike = (id: number) => {
     color: rgba(4, 4, 5, 0.22)
   }
 
+  .tags {
+    margin-left: 16px;
+  }
+
   .tags__item {
     font: var(--font-caption);
     width: max-content;
@@ -118,7 +155,19 @@ const toggleDislike = (id: number) => {
     margin-right: 8px;
   }
   .tags__item:first-child {
-
+    position: relative;
+  }
+  .tags__item:first-child::after {
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    right: 100%;
+    top: 0;
+    border-radius: 5px;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid var(--gray);
   }
 
 </style>

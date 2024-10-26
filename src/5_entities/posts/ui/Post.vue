@@ -1,8 +1,10 @@
 <template>
-  <h2 class="title">{{ title }}</h2>
-  <p class="text">{{ body }}</p>
+  <div class="post">
+    <h2 class="title">{{ title }}</h2>
+    <p class="text">{{ body }}</p>
 
-  <PostActions :reactions="reactions" :id="id" :tags="tags" :userReaction="userReaction" />
+    <PostActions :reactions="reactions" :id="id" :tags="tags" :userReaction="userReaction" />
+  </div>
 
 </template>
 
@@ -15,6 +17,10 @@ const props = defineProps<TPost>()
 </script>
 
 <style scoped>
+
+  .post {
+    margin-bottom: 32px;
+  }
 
   .title {
     font: var(--font-h1);
