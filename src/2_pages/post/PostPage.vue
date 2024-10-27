@@ -30,7 +30,7 @@
   import { useRoute } from 'vue-router';
   import { computed } from 'vue';
   import { onMounted } from 'vue';
-import Comment from '@/5_entities/posts/ui/Comment.vue';
+  import Comment from '@/5_entities/posts/ui/Comment.vue';
 
   const route = useRoute();
 

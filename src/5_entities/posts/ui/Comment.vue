@@ -6,7 +6,7 @@
       <div class="text">{{ body }}</div>
       <div class="bottom">
         <div class="date">Today(net v api)</div>
-        <button class="remove">Удалить</button>
+        <button class="remove" @click="removeComment">Удалить</button>
       </div>
     </div>
   </div>
@@ -15,8 +15,15 @@
 
 <script lang="ts" setup>
 import { type TComment } from '@/6_shared/config/types';
+import { usePostsStore } from '../model/store';
 
 const props = defineProps<TComment>()
+
+const postsStore = usePostsStore();
+
+const removeComment = () => {
+  postsStore.removePostComment(props.postId, props.id);
+}
 
 </script>
 

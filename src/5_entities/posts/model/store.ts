@@ -40,6 +40,10 @@ export const usePostsStore = defineStore("postsStore", () => {
     }
   }
 
+  const removePostComment = (postId: number, commentId: number) => {
+    commentsById.value[postId] = commentsById.value[postId].filter((comment) => comment.id !== commentId)
+  }
+
 
   return {
     posts,
@@ -47,6 +51,7 @@ export const usePostsStore = defineStore("postsStore", () => {
     loadPostComments,
     init,
     toggleLikePost,
-    toggleDislikePost
+    toggleDislikePost,
+    removePostComment,
   }
 })
