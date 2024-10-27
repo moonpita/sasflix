@@ -10,6 +10,14 @@
     :views="post.views"
     :userId="post.userId"
     :userReaction="post.userReaction"
+    :openComments="false"
+  />
+  <Comment v-if="post" v-for="comment in postsStore.commentsById[post.id]"
+    :id="comment.id"
+    :body="comment.body"
+    :postId="comment.postId"
+    :likes="comment.likes"
+    :user="comment.user"
   />
   <div v-else>
     Пост не найден
@@ -20,7 +28,9 @@
   import Post from '@/5_entities/posts/ui/Post.vue';
   import { usePostsStore } from '@/5_entities/posts/model/store';
   import { useRoute } from 'vue-router';
-import { computed } from 'vue';
+  import { computed } from 'vue';
+  import { onMounted } from 'vue';
+import Comment from '@/5_entities/posts/ui/Comment.vue';
 
   const route = useRoute();
 
@@ -28,5 +38,9 @@ import { computed } from 'vue';
   const postId = Number(route.params.postId);
 
   const post = computed(() => postsStore.posts.find(post => post.id === postId));
+
+  onMounted(() => {
+    postsStore.loadPostComments(postId);
+  })
 
 </script>

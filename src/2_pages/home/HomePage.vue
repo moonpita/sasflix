@@ -11,6 +11,7 @@
       :views="post.views"
       :userId="post.userId"
       :userReaction="post.userReaction"
+      :openComments="true"
     />
   </div>
 </template>
