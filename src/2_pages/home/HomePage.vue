@@ -16,12 +16,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
   import Post from '@/5_entities/posts/ui/Post.vue';
   import { usePostsStore } from '@/5_entities/posts/model/store';
-  import { PublicAPI } from '@/6_shared/api';
 
   const postsStore = usePostsStore()
-  const posts = ref([])
 
 </script>
