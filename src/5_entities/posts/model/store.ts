@@ -44,11 +44,14 @@ export const usePostsStore = defineStore("postsStore", () => {
     commentsById.value[postId] = commentsById.value[postId].filter((comment) => comment.id !== commentId)
   }
 
+  const getPostCommentsLength = (postId: number) => commentsById.value[postId].length;
+
 
   return {
     posts,
     commentsById,
     loadPostComments,
+    getPostCommentsLength,
     init,
     toggleLikePost,
     toggleDislikePost,

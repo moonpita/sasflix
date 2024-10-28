@@ -12,6 +12,7 @@
     :userReaction="post.userReaction"
     :openComments="false"
   />
+  <div v-if="post" class="comments-count">{{ postsStore.getPostCommentsLength(post.id) }} комментариев</div>
   <Comment v-if="post" v-for="comment in postsStore.commentsById[post.id]"
     :id="comment.id"
     :body="comment.body"
@@ -44,3 +45,14 @@
   })
 
 </script>
+
+<style scoped>
+
+  .comments-count {
+    font: var(--font-h1);
+    color: #000;
+    margin: 24px 0px;
+  }
+
+
+</style>
